@@ -1,10 +1,19 @@
 //import liraries
-
-import * as React from 'react';
-import {View, useWindowDimensions, StyleSheet} from 'react-native';
+//import liraries
+import React, {useState, useEffect, useRef} from 'react';
+import {
+  View,
+  useWindowDimensions,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
 import {TabView, SceneMap} from 'react-native-tab-view';
 import Login_N from '../Login/Login_N';
 import Opareto_Qr_scanner from '../Login/Opareto_Qr_scanner';
+import instance from '../Axiosinstance';
+import {useIsFocused} from '@react-navigation/native';
+import DeviceInfo from 'react-native-device-info';
+import Appupdatepage from '../AppUpdate/Appupdatepage';
 //https://reactnavigation.org/docs/tab-view/
 
 const LoginRoute = () => <Login_N />;
@@ -26,13 +35,44 @@ const TabsPage = () => {
     {key: 'Login', title: 'Login'},
   ]);
 
+  const [apiversion, setApiversion] = React.useState(0);
+
+  const isFocused = useIsFocused();
+  useEffect(() => {
+    if (isFocused) {
+      instance
+        .get(`/Menu_Permission/AppVersion`)
+        .then(response => {
+          var result = response.data[0];
+          setApiversion(result.Version);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
+  }, [isFocused]);
+
+  const deviceVersion = DeviceInfo.getVersion();
+
+  // console.log('token.....++. ' + apiversion);
+
+  // console.log('token1.....++. ' + deviceVersion);
+
   return (
-    <TabView
-      navigationState={{index, routes}}
-      renderScene={renderScene}
-      onIndexChange={setIndex}
-      initialLayout={{width: layout.width}}
-    />
+    <View style={{flex: 1}}>
+      {apiversion === 0 ? (
+        <ActivityIndicator />
+      ) : parseInt(apiversion) === parseInt(deviceVersion) ? (
+        <TabView
+          navigationState={{index, routes}}
+          renderScene={renderScene}
+          onIndexChange={setIndex}
+          initialLayout={{width: layout.width}}
+        />
+      ) : (
+        <Appupdatepage />
+      )}
+    </View>
   );
 };
 

@@ -754,31 +754,63 @@ const Operator_daily_info = ({navigation, route}) => {
           {rowData.TotalPartEntry}
         </Text>,
 
-        <Pressable
-          style={{
-            width: 50,
-            height: 30,
-            justifyContent: 'center',
-            alignContent: 'center',
-            backgroundColor: '#E9C46B',
-            borderRadius: 5,
-            elevation: 8,
-          }}
-          onPress={() => {
-            handlechecksendData(rowData);
-            //addToList(item)
-          }}>
-          <Text
+        getSampleQty > rowData.TotalPartEntry ? (
+          <Pressable
             style={{
-              color: '#000',
-              fontSize: textFontSize15,
-              textAlign: 'center',
+              width: 50,
+              height: 30,
               justifyContent: 'center',
               alignContent: 'center',
+              backgroundColor: '#E9C46B',
+              borderRadius: 5,
+              elevation: 8,
+            }}
+            onPress={() => {
+              handlechecksendData(rowData);
+              //addToList(item)
             }}>
-            Submit
-          </Text>
-        </Pressable>,
+            <Text
+              style={{
+                color: '#000',
+                fontSize: textFontSize15,
+                textAlign: 'center',
+                justifyContent: 'center',
+                alignContent: 'center',
+              }}>
+              Submit
+            </Text>
+          </Pressable>
+        ) : (
+          <Pressable
+            style={{
+              width: 50,
+              height: 30,
+              justifyContent: 'center',
+              alignContent: 'center',
+              backgroundColor: '#E9C46B',
+              borderRadius: 5,
+              elevation: 8,
+            }}
+            onPress={() => {
+              // handlechecksendData(rowData);
+              //addToList(item)
+              Toast.show({
+                type: 'success',
+                text1: 'Part Data Successfully Added',
+              });
+            }}>
+            <Text
+              style={{
+                color: '#000',
+                fontSize: textFontSize15,
+                textAlign: 'center',
+                justifyContent: 'center',
+                alignContent: 'center',
+              }}>
+              Submit
+            </Text>
+          </Pressable>
+        ),
       ]}
       widthArr={[20, 100, 80, 50, 100]}
       style={[
