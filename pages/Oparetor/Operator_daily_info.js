@@ -65,6 +65,7 @@ const Operator_daily_info = ({navigation, route}) => {
   const isFocused = useIsFocused();
   const [Dialog, setDialog] = useState(false);
   const [Dialogpart, setDialogpart] = useState(false);
+  const [partComplete, setPartComplete] = useState(false);
   const [resetData, setResetData] = useState(0);
   const [ColorsCode, setColorsCode] = useState(0);
   const [totaluseTime, setTotaluseTime] = useState(0);
@@ -754,7 +755,7 @@ const Operator_daily_info = ({navigation, route}) => {
           {rowData.TotalPartEntry}
         </Text>,
 
-        getSampleQty > rowData.TotalPartEntry ? (
+        getSampleQty !== rowData.TotalPartEntry ? (
           <Pressable
             style={{
               width: 50,
@@ -792,12 +793,9 @@ const Operator_daily_info = ({navigation, route}) => {
               elevation: 8,
             }}
             onPress={() => {
-              // handlechecksendData(rowData);
-              //addToList(item)
-              Toast.show({
-                type: 'success',
-                text1: 'Part Data Successfully Added',
-              });
+              setPartComplete(true);
+              setDialogpart(false);
+              console.log('hi');
             }}>
             <Text
               style={{
@@ -920,7 +918,7 @@ const Operator_daily_info = ({navigation, route}) => {
               justifyContent: 'center',
               alignContent: 'center',
             }}>
-            Todays Target pcs
+            Todays Target Qty
           </Text>
 
           <Text
@@ -952,7 +950,7 @@ const Operator_daily_info = ({navigation, route}) => {
               justifyContent: 'center',
               alignContent: 'center',
             }}>
-            Target SMV
+            Allocate SMV
           </Text>
 
           <Text
@@ -1532,6 +1530,56 @@ const Operator_daily_info = ({navigation, route}) => {
                   mode="text"
                   onPress={() => {
                     setDialogpart(!Dialogpart);
+                    startStopwatch();
+                  }}
+                  style={{
+                    backgroundColor: '#fff',
+                    width: '100%',
+                    borderRadius: 8,
+                    height: 35,
+                  }}>
+                  Cancel
+                </Button>
+              </View>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
+      {/* ------------------------------------------model for Part Complete-------------------------------------------------------- */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={partComplete}
+        onRequestClose={() => {
+          setPartComplete(!partComplete);
+        }}>
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <View style={styles.centeredView2}>
+            <ScrollView horizontal={true}>
+              <View style={{width: '100%', justifyContent: 'center'}}>
+                <Text
+                  style={{color: 'white', fontSize: 20, fontWeight: 'bold'}}>
+                  Part Complete
+                </Text>
+              </View>
+            </ScrollView>
+
+            <View
+              style={{
+                flexDirection: 'row',
+                margin: 5,
+                marginBottom: 25,
+              }}>
+              <View style={{width: '100%'}}>
+                <Button
+                  mode="text"
+                  onPress={() => {
+                    setPartComplete(!partComplete);
                     startStopwatch();
                   }}
                   style={{
