@@ -1,0 +1,808 @@
+//import liraries
+import React, {useState, useEffect} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
+import {Button} from 'react-native-paper';
+import DeviceInfo from 'react-native-device-info';
+import MusicControl, {Command} from 'react-native-music-control';
+import Sound from 'react-native-sound';
+import instance from '../Axiosinstance';
+import Toast, {BaseToast, ErrorToast} from 'react-native-toast-message';
+const Colors = {
+  AQUA_GREEN: '#1A5276',
+  RED: '#B03A2E',
+  ORANGE: '#DC7633',
+  PURPLE: '#8E44AD',
+  GRAY: '#566573',
+  Default: '#016FC4',
+};
+// create a component
+
+const requireAudio = require('../Img/start.mp3');
+const requirestop = require('../Img/stop.mp3');
+const formatTime = time => {
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
+  return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(
+    2,
+    '0',
+  )}`;
+};
+
+const Operator_daily_info = ({navigation, route}) => {
+  const employeeID = route.params?.EmployeeCordNo;
+  const [lineName, setlineName] = useState('');
+  const [totalProduction, setTotalProduction] = useState(0);
+  const [headphone, setHeadphone] = useState(false);
+  const [ipaddress, setIpaddress] = useState('');
+  const [macaddress, setMacaddress] = useState('');
+  const [ProductionStart, setProductionStarts] = useState(0);
+  const [ProductionStartwithBundle, setProductionStartwithBundle] = useState(0);
+  const [machineNo, setMachineNo] = useState('');
+  const [styleNo, setStyleNo] = useState('');
+  const [operation, setoperation] = useState('');
+  const Colors = {
+    AQUA_GREEN: '#1A5276',
+    RED: '#B03A2E',
+    ORANGE: '#DC7633',
+    PURPLE: '#8E44AD',
+    GRAY: '#566573',
+    Default: '#016FC4',
+  };
+
+  const ProductionStartNow = () => {
+    setProductionStarts(1);
+
+    soundStart();
+
+    handleStartStop();
+  };
+  const ProductionStartNowwithBundle = () => {
+    setProductionStartwithBundle(1);
+    soundStart();
+    handleStartStop();
+  };
+  const soundStart = () => {
+    // var whoosh = new Sound(requireAudio, error => {
+    //   whoosh.play(success => {
+    //     if (success) {
+    //       whoosh.setSpeakerphoneOn(true);
+    //       whoosh.play(f => whoosh.release());
+    //     } else {
+    //       // console.log('playback failed due to audio decoding errors');
+    //     }
+    //   });
+    // });
+    const s = new Sound(requireAudio, e => {
+      if (requireAudio > 0) {
+        s.setSpeakerphoneOn(true);
+        s.play(() => s.release());
+      }
+    });
+  };
+  const soundStartforheadphone = () => {
+    // var whoosh = new Sound(requireAudio, error => {
+    //   whoosh.play(success => {
+    //     if (success) {
+    //       whoosh.setSpeakerphoneOn(true);
+    //       whoosh.play(f => whoosh.release());
+    //     } else {
+    //       // console.log('playback failed due to audio decoding errors');
+    //     }
+    //   });
+    // });
+    const s = new Sound(requireAudio, e => {
+      if (requireAudio > 0) {
+        s.setSpeakerphoneOn(true);
+        s.play(() => s.release());
+      }
+    });
+  };
+
+  const errormsg = () => {
+    Toast.show({
+      type: 'error',
+      text1: 'Production Not Save',
+      text2: 'please contact with developer team',
+    });
+  };
+
+  const Op_Prouduction_Calc_Data = () => {
+    instance
+      .get(`/Op_Production_Calc/Op_Prouduction_Calc_Data/${employeeID}`)
+      .then(response => {
+        var result = response.data[0];
+        setTotalProduction(result.totalProduction);
+        setMachineNo(result.MachineNo);
+        setStyleNo(result.StyleName);
+        setoperation(result.Operation);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerStyle: {
+        backgroundColor: '#EB5043',
+      },
+    });
+  }, [navigation]);
+
+  // ---------------------Time-----------------------------
+  const [currentTime, setCurrentTime] = useState(new Date());
+  useEffect(() => {
+    Op_Prouduction_Calc_Data();
+    DeviceInfo?.getIpAddress().then(ip => {
+      setIpaddress(ip);
+    });
+
+    DeviceInfo.getUniqueId().then(uniqueId => {
+      setMacaddress(uniqueId);
+    });
+
+    const intervalId = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
+  const [running, setRunning] = useState(false);
+  const [time, setTime] = useState(0);
+
+  const CurrentVersion = DeviceInfo.isHeadphonesConnected().then(enabled => {
+    if (enabled) {
+      setHeadphone(enabled);
+
+      MusicControl.enableControl('play', true);
+      MusicControl.enableControl('pause', true);
+
+      MusicControl.on('play', () => {
+        console.log('play');
+
+        setBundleProduction(0);
+        setTotalProduction(parseInt(totalProduction) + 1);
+        var data_new = {
+          lineId: 2,
+          styleName: '3333429',
+          machineNo: 10,
+          operation: 'Zip join',
+          useTime: parseInt(time),
+          production: parseInt(totalProduction + 1),
+          macAddress: macaddress,
+          ipAddress: ipaddress,
+          createby: employeeID,
+          createDate: new Date(),
+        };
+
+        instance
+          .post('/ProductionEntryByOp', JSON.stringify(data_new))
+          .then(res => {
+            {
+              res.data > 0 ? soundStartforheadphone() : errormsg();
+            }
+            {
+              time === 0 ? handleStartStop() : handleReset();
+            }
+          });
+
+        // var whoosh = new Sound(requireAudio, error => {
+        //   whoosh.play(success => {
+        //     if (success) {
+        //       whoosh.setSpeakerphoneOn(true);
+        //       whoosh.play(f => whoosh.release());
+        //     } else {
+        //       // console.log('playback failed due to audio decoding errors');
+        //     }
+        //   });
+        // });
+
+        //     //incrementCountercounterBundle();
+        //setBundleProduction(f => bundleproduction + 1);
+      });
+
+      MusicControl.on('pause', () => {
+        console.log('pause');
+        setBundleProduction(f => bundleproduction - 1);
+        soundStart();
+      });
+    } else {
+      setHeadphone(enabled);
+    }
+  });
+
+  //   // Set media controls
+  //   MusicControl.setNowPlaying({
+  //     //   title: 'Song Title',
+  //     //   artist: 'Artist Name',
+  //     //   album: 'Album Name',
+  //     //   artwork: 'https://example.com/album-artwork.jpg',
+  //   });
+
+  //   MusicControl.enableControl('play', true);
+  //   MusicControl.enableControl('pause', true);
+
+  //   // Listen for control events
+  //   MusicControl.on('play', () => {
+  //     // Handle play event
+  //     console.log('hi');
+  //     incrementCountercounterBundle();
+  //     setCounterBundle(f => counterBundle + 1);
+  //   });
+
+  //   MusicControl.on('pause', () => {
+  //     // Handle pause event
+  //   });
+
+  //   // Check audio jack status when the component mounts
+  //   const checkAudioJackStatus = async () => {
+  //     const headphonesConnected = await DeviceInfo.isHeadphonesConnected();
+  //     // Do something based on headphone connection status
+  //   };
+
+  //   checkAudioJackStatus();
+
+  //   // Clear media controls and remove listeners when the component is unmounted
+  //   return () => {
+  //     MusicControl.resetNowPlaying();
+  //     MusicControl.resetBindings();
+  //   };
+  // }, []);
+  // //isHeadphonesConnected
+
+  // -------------------per pcs incrementCounter------------------------------------
+
+  const incrementCounter = () => {
+    setBundleProduction(0);
+    setTotalProduction(parseInt(totalProduction) + 1);
+
+    var data_new = {
+      lineId: 2,
+      styleName: '3333429',
+      machineNo: 10,
+      operation: 'Zip join',
+      useTime: parseInt(time),
+      production: parseInt(totalProduction + 1),
+      macAddress: macaddress,
+      ipAddress: ipaddress,
+      createby: employeeID,
+      createDate: new Date(),
+    };
+
+    instance
+      .post('/ProductionEntryByOp', JSON.stringify(data_new))
+      .then(res => {
+        {
+          res.data > 0 ? soundStart() : errormsg();
+        }
+      });
+  };
+
+  const decrementCounter = () => {
+    if (totalProduction !== 0) {
+      setTotalProduction(parseInt(totalProduction) - 1);
+      soundStart();
+    }
+  };
+
+  //   ----------------------per pcs Product Time---------------
+  useEffect(() => {
+    let interval;
+    if (running) {
+      interval = setInterval(() => {
+        setTime(prevTime => prevTime + 1);
+      }, 1000);
+    } else {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [running]);
+
+  const handleReset = () => {
+    setRunning(false);
+    setTime(0);
+    setRunning(running);
+  };
+  const handleResets = () => {
+    setRunning(false);
+    setTime(0);
+  };
+  const handleStartStop = () => {
+    setRunning(!running);
+  };
+
+  // -------------------Bundle incrementCounter------------------------------------
+  const [bundleproduction, setBundleProduction] = useState(0);
+  const incrementCountercounterBundle = () => {
+    setBundleProduction(bundleproduction + 1);
+  };
+
+  const decrementCountercounterBundle = () => {
+    if (bundleproduction !== 0) {
+      setBundleProduction(bundleproduction - 1);
+    }
+  };
+
+  const formattedTime = currentTime.toLocaleTimeString();
+  return (
+    <SafeAreaView style={{backgroundColor: 'yellow', flex: 1}}>
+      <View style={{flexDirection: 'row', margin: 5}}>
+        <View
+          style={{
+            height: 80,
+            width: '33%',
+            backgroundColor: Colors.Default,
+            borderRadius: 10,
+            elevation: 15,
+          }}>
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: 9,
+              fontWeight: 'bold',
+              textAlign: 'center',
+              justifyContent: 'center',
+              alignContent: 'center',
+            }}>
+            Target Efficency
+          </Text>
+
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: 40,
+              fontWeight: 'bold',
+              textAlign: 'center',
+              zIndex: 1000,
+            }}>
+            80%
+          </Text>
+        </View>
+        <View
+          style={{
+            height: 80,
+            width: '33%',
+            backgroundColor: Colors.Default,
+            marginLeft: 3,
+            borderRadius: 10,
+          }}>
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: 9,
+              fontWeight: 'bold',
+              textAlign: 'center',
+              justifyContent: 'center',
+              alignContent: 'center',
+            }}>
+            Todays Target pcs
+          </Text>
+
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: 40,
+              fontWeight: 'bold',
+              textAlign: 'center',
+            }}>
+            100
+          </Text>
+        </View>
+        <View
+          style={{
+            height: 80,
+            width: '33%',
+            backgroundColor: Colors.Default,
+            marginLeft: 3,
+            borderRadius: 10,
+          }}>
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: 9,
+              fontWeight: 'bold',
+              textAlign: 'center',
+              justifyContent: 'center',
+              alignContent: 'center',
+            }}>
+            Defect Qty
+          </Text>
+
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: 40,
+              fontWeight: 'bold',
+              textAlign: 'center',
+            }}>
+            10
+          </Text>
+        </View>
+      </View>
+      {/* -----------------------------Achived area----------------------------------------------------- */}
+      <View style={{flexDirection: 'row', margin: 5}}>
+        <View
+          style={{
+            height: 80,
+            width: '33%',
+            backgroundColor: Colors.Default,
+            borderRadius: 10,
+            elevation: 15,
+          }}>
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: 9,
+              fontWeight: 'bold',
+              textAlign: 'center',
+              justifyContent: 'center',
+              alignContent: 'center',
+            }}>
+            Achived Efficency
+          </Text>
+
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: 40,
+              fontWeight: 'bold',
+              textAlign: 'center',
+            }}>
+            60%
+          </Text>
+        </View>
+        <View
+          style={{
+            height: 80,
+            width: '33%',
+            backgroundColor: Colors.Default,
+            marginLeft: 3,
+            borderRadius: 10,
+          }}>
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: 9,
+              fontWeight: 'bold',
+              textAlign: 'center',
+              justifyContent: 'center',
+              alignContent: 'center',
+            }}>
+            Achive Production
+          </Text>
+
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: 40,
+              fontWeight: 'bold',
+              textAlign: 'center',
+            }}>
+            80
+          </Text>
+        </View>
+        <View
+          style={{
+            height: 80,
+            width: '33%',
+            backgroundColor: Colors.Default,
+            marginLeft: 3,
+            borderRadius: 10,
+          }}>
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: 9,
+              fontWeight: 'bold',
+              textAlign: 'center',
+              justifyContent: 'center',
+              alignContent: 'center',
+            }}>
+            Your Score
+          </Text>
+
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: 40,
+              fontWeight: 'bold',
+              textAlign: 'center',
+            }}>
+            100
+          </Text>
+        </View>
+      </View>
+      {/* ------------------------------Line Info------------------------------------ */}
+      <View style={{flexDirection: 'row', margin: 3}}>
+        <View
+          style={{
+            height: 200,
+            width: '49%',
+            backgroundColor: '#EC681B',
+            marginLeft: 3,
+            borderRadius: 10,
+          }}>
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: 10,
+              fontWeight: 'bold',
+              textAlign: 'center',
+            }}>
+            {' '}
+            Line Info
+          </Text>
+
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: 10,
+            }}>
+            {' '}
+            1. Name : {employeeID}
+          </Text>
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: 10,
+            }}>
+            {' '}
+            2. Work Station No : {machineNo}
+          </Text>
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: 10,
+            }}>
+            {' '}
+            2. Style : {styleNo}
+          </Text>
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: 10,
+            }}>
+            {' '}
+            2. Operation : {operation}
+          </Text>
+        </View>
+        <View
+          style={{
+            height: 200,
+            width: '49%',
+            backgroundColor: '#EC681B',
+            marginLeft: 5,
+            borderRadius: 10,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Image
+            source={require('../Img/GARMENT_BREAKDOWN.jpg')}
+            style={{width: '95%', height: '95%'}}
+          />
+        </View>
+      </View>
+      {/* ------------------------------------Clock-------------------------------------------------------------     */}
+      <Text
+        style={{
+          textAlign: 'center',
+          fontSize: 30,
+          fontWeight: 'bold',
+          backgroundColor: '#5D2684',
+          color: '#fff',
+          marginTop: 5,
+        }}>
+        {formattedTime}
+      </Text>
+
+      {/* ---------------------Per Pcs Production------------------------- */}
+      <View style={{flexDirection: 'row', marginTop: 3}}>
+        <View style={{width: '50%'}}>
+          <Text
+            style={{
+              backgroundColor: '#892E88',
+              color: '#fff',
+              textAlign: 'center',
+              fontSize: 12,
+              fontWeight: 'bold',
+            }}>
+            {' '}
+            Per Pcs Production{' '}
+          </Text>
+        </View>
+        <View style={{width: '50%', marginLeft: 10}}>
+          <Text
+            style={{
+              backgroundColor: '#892E88',
+              color: '#fff',
+              textAlign: 'center',
+              fontSize: 12,
+              fontWeight: 'bold',
+            }}>
+            {' '}
+            Bundle Production{' '}
+          </Text>
+        </View>
+      </View>
+      {/* ---------------------------------------------- */}
+      {/* -----------------Use Time area----------------------------- */}
+      <Toast />
+      <View style={{flexDirection: 'row', marginTop: 3}}>
+        <Text
+          style={{
+            backgroundColor: '#892E88',
+            color: '#fff',
+            textAlign: 'center',
+            fontSize: 18,
+            fontWeight: 'bold',
+            width: '100%',
+          }}>
+          Use Time : {formatTime(time)}
+        </Text>
+      </View>
+      {/* _____________________________________________________________________________________ */}
+      <View style={{flexDirection: 'row', margin: 10, marginTop: 5}}>
+        <View
+          style={{
+            height: 80,
+            width: '49%',
+            backgroundColor: '#189938',
+            borderRadius: 10,
+            elevation: 15,
+          }}>
+          {totalProduction == 0 && ProductionStart == 0 ? (
+            <Button
+              style={{justifyContent: 'center', paddingTop: 5}}
+              labelStyle={{fontSize: 55, color: '#fff'}}
+              icon="plus-circle"
+              mode="text"
+              onPress={() => {
+                ProductionStartNow();
+              }}>
+              <Text style={{fontSize: 40, paddingTop: 25}}>Start</Text>
+            </Button>
+          ) : (
+            <Button
+              style={{justifyContent: 'center', paddingTop: 5, height: '90%'}}
+              labelStyle={{fontSize: 55, color: '#fff'}}
+              icon="plus-circle"
+              mode="text"
+              onPress={() => {
+                incrementCounter();
+
+                {
+                  time == 0 ? handleStartStop() : handleReset();
+                }
+              }}>
+              <Text style={{fontSize: 40, paddingTop: 25}}>
+                {' '}
+                {totalProduction}
+              </Text>
+            </Button>
+          )}
+        </View>
+
+        <View
+          style={{
+            height: 80,
+            width: '49%',
+            backgroundColor: '#189938',
+            borderRadius: 10,
+            elevation: 15,
+            marginLeft: 10,
+          }}>
+          {ProductionStartwithBundle == 0 ? (
+            <Button
+              style={{justifyContent: 'center', paddingTop: 5}}
+              labelStyle={{fontSize: 55, color: '#fff'}}
+              icon="plus-circle"
+              mode="text"
+              onPress={() => {
+                ProductionStartNowwithBundle();
+              }}>
+              <Text style={{fontSize: 40, paddingTop: 25}}>Start</Text>
+            </Button>
+          ) : (
+            <Button
+              style={{justifyContent: 'center', paddingTop: 5}}
+              labelStyle={{fontSize: 55, color: '#fff'}}
+              icon="plus-circle"
+              mode="text"
+              onPress={() => {
+                incrementCountercounterBundle();
+                {
+                  time == 0 ? handleStartStop() : handleReset();
+                }
+              }}>
+              <Text style={{fontSize: 40, paddingTop: 25}}>
+                {' '}
+                {bundleproduction}
+              </Text>
+            </Button>
+          )}
+        </View>
+      </View>
+
+      {/* -------------------------------------------------------------------------------------------------- */}
+
+      <View style={{flexDirection: 'row', margin: 10, marginTop: 5}}>
+        <View
+          style={{
+            height: 80,
+            width: '49%',
+            backgroundColor: '#E51B1F',
+            borderRadius: 10,
+            elevation: 15,
+          }}>
+          <Button
+            style={{justifyContent: 'center', paddingTop: 5}}
+            labelStyle={{fontSize: 55, color: '#fff'}}
+            icon="minus-circle"
+            mode="text"
+            onPress={() => {
+              decrementCounter();
+              handleResets();
+            }}>
+            {totalProduction == 0 && ProductionStart == 0 ? (
+              <Text style={{fontSize: 40, paddingTop: 25}}>Start</Text>
+            ) : (
+              <Text style={{fontSize: 40, paddingTop: 25}}>
+                {totalProduction}
+              </Text>
+            )}
+          </Button>
+        </View>
+        <View
+          style={{
+            height: 80,
+            width: '49%',
+            backgroundColor: '#E51B1F',
+            borderRadius: 10,
+            elevation: 15,
+            marginLeft: 10,
+          }}>
+          <Button
+            style={{justifyContent: 'center', paddingTop: 5}}
+            labelStyle={{fontSize: 55, color: '#fff'}}
+            icon="minus-circle"
+            mode="text"
+            onPress={() => {
+              decrementCountercounterBundle();
+              handleResets();
+            }}>
+            {ProductionStartwithBundle == 0 ? (
+              <Text style={{fontSize: 40, paddingTop: 25}}>Start</Text>
+            ) : (
+              <Text style={{fontSize: 40, paddingTop: 25}}>
+                {bundleproduction}
+              </Text>
+            )}
+          </Button>
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+};
+
+// define your styles
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#2c3e50',
+  },
+});
+
+//make this component available to the app
+export default Operator_daily_info;

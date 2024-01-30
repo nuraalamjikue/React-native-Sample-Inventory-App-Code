@@ -1,0 +1,11 @@
+{
+  "name": "react-native-button-paper",
+  "version": "1.0.5",
+  "description": "React native Custon Button only use for me",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "nura alam jikue",
+  "license": "ISC"
+}

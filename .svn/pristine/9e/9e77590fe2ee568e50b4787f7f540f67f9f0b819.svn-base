@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "com.hudl.rn.systembars.react-native-system-bars-merged_res-20:/layout-watch-v20/abc_alert_dialog_title_material.xml",
+        "source": "com.hudl.rn.systembars.react-native-system-bars-appcompat-1.4.1-9:/layout-watch-v20/abc_alert_dialog_title_material.xml"
+    },
+    {
+        "merged": "com.hudl.rn.systembars.react-native-system-bars-merged_res-20:/layout-watch-v20/abc_alert_dialog_button_bar_material.xml",
+        "source": "com.hudl.rn.systembars.react-native-system-bars-appcompat-1.4.1-9:/layout-watch-v20/abc_alert_dialog_button_bar_material.xml"
+    }
+]

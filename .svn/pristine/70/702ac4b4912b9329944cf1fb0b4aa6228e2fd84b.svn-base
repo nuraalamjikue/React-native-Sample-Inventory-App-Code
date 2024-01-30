@@ -1,0 +1,98 @@
+declare const visibilityFlags: {
+    SYSTEM_UI_FLAG_VISIBLE: number;
+    SYSTEM_UI_FLAG_LOW_PROFILE: number;
+    SYSTEM_UI_FLAG_HIDE_NAVIGATION: number;
+    SYSTEM_UI_FLAG_FULLSCREEN: number;
+    SYSTEM_UI_FLAG_LAYOUT_STABLE: number;
+    SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION: number;
+    SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN: number;
+    SYSTEM_UI_FLAG_IMMERSIVE: number;
+    SYSTEM_UI_FLAG_IMMERSIVE_STICKY: number;
+    SYSTEM_UI_FLAG_LIGHT_STATUS_BAR: number;
+    SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR: number;
+};
+export default class AndroidSystemBars {
+    private static module;
+    /**
+     * Control the visibility of Android's 'system bars' (i.e. the
+     * Status Bar and Navigation Bar).
+     *
+     * For more information on setting system UI flags on Android
+     * head over to https://developer.android.com/training/system-ui
+     *
+     * @param flags vararg array of Android system UI flags
+     */
+    static setSystemUIVisibility(...flags: (keyof typeof visibilityFlags)[]): void;
+    /**
+     * Reveal/unhide the Status and Navigation Bars.
+     *
+     * USes the 'SYSTEM_UI_FLAG_VISIBLE' flag.
+     */
+    static clearFlags(): void;
+    /**
+     * Set your application's content to appear behind the status and navigation bar.
+     *
+     * https://developer.android.com/training/system-ui/status#behind
+     */
+    static setContentBehindSystemBars(): void;
+    /**
+     * Dim the status and navigation bars.
+     *
+     * Uses the 'SYSTEM_UI_FLAG_LOW_PROFILE' flag.
+     *
+     * As soon as the user touches the status or navigation bar, the
+     * flag is cleared, causing the bars to be undimmed. Once the
+     * flag has been cleared, your app needs to reset it if you want
+     * to dim the bars again.
+     *
+     * https://developer.android.com/training/system-ui/dim
+     */
+    static dimSystemBars(): void;
+    /**
+     * Hides the status bar.
+     *
+     * Uses the 'SYSTEM_UI_FLAG_FULLSCREEN' flag.
+     *
+     * https://developer.android.com/training/system-ui/status#41
+     */
+    static hideStatusBar(): void;
+    /**
+     * Hides the navigation bar.
+     *
+     * Uses the 'SYSTEM_UI_FLAG_HIDE_NAVIGATION' flag.
+     *
+     * https://developer.android.com/training/system-ui/navigation#40
+     */
+    static hideNavigationBar(): void;
+    /**
+     * Hides the status bar and navigation bar.
+     *
+     * Uses the 'SYSTEM_UI_FLAG_HIDE_NAVIGATION' and 'SYSTEM_UI_FLAG_FULLSCREEN' flags.
+     *
+     * https://developer.android.com/training/system-ui/navigation#40
+     */
+    static hideStatusAndNavigationBars(): void;
+    /**
+     * Enables fullscreen mode by hiding the status and navigation bars with
+     * different behaviors (immersive, sticky immersive or 'lean back').
+     *
+     * Immersive mode uses 'SYSTEM_UI_FLAG_IMMERSIVE', 'SYSTEM_UI_FLAG_FULLSCREEN'
+     * and 'SYSTEM_UI_FLAG_HIDE_NAVIGATION' flags.
+     *
+     * Sticky immersive mode uses 'SYSTEM_UI_FLAG_IMMERSIVE', 'SYSTEM_UI_FLAG_FULLSCREEN'
+     * and 'SYSTEM_UI_FLAG_HIDE_NAVIGATION' flags.
+     *
+     * 'Lean back' mode uses 'SYSTEM_UI_FLAG_FULLSCREEN' and
+     * 'SYSTEM_UI_FLAG_HIDE_NAVIGATION' flags.
+     *
+     * https://developer.android.com/training/system-ui/immersive
+     *
+     * @param mode 'immersive', 'sticky-immersive' or 'lean-back'.
+     * @param preventResizing Defaults to false. If true, adds the
+     * 'SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION' and 'SYSTEM_UI_FLAG_LAYOUT_STABLE' flags
+     * See https://developer.android.com/training/system-ui/immersive#EnableFullscreen
+     * for more info.
+     */
+    static enableFullScreenMode(mode: 'immersive' | 'sticky-immersive' | 'lean-back', preventResizing?: boolean): void;
+}
+export {};

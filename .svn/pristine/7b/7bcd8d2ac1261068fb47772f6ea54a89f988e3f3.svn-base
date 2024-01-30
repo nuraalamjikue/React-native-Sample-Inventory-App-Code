@@ -1,0 +1,44 @@
+# Custom Paper My Button
+
+React native Custon Button only use for me
+
+## Installation
+
+Install my-project with npm
+
+```bash
+  npm install react-native-button-paper
+  OR
+ yarn install react-native-button-paper
+```
+
+## Basic Example
+
+```javascript
+import React, { Component } from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { Button } from "react-native-paper";
+
+import Buttononpaper from "react-native-button-paper";
+
+// create a component
+const Button = () => {
+  return (
+    <View style={styles.container}>
+      <Buttononpaper
+        title={"Npm Button"}
+        bgcolor={"#4285F4"}
+        borderRadius={8}
+        buttonicon={"check-circle"}
+        buttonmode={"text"}
+        labelcolor={"#fff"}
+        titleColor={"#fff"}
+        titleFronsize={12}
+        onPress={() => {
+          console.log("successfull");
+        }}
+      />
+    </View>
+  );
+};
+```

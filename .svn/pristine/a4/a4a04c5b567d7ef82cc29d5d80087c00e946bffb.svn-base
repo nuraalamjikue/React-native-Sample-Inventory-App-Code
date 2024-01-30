@@ -1,0 +1,62 @@
+[
+    {
+        "merged": "com.tanguyantoine.react.react-native-music-control-merged_res-6:/drawable/skip_forward_30.xml",
+        "source": "com.tanguyantoine.react.react-native-music-control-main-7:/drawable/skip_forward_30.xml"
+    },
+    {
+        "merged": "com.tanguyantoine.react.react-native-music-control-merged_res-6:/drawable/notification_bg_low.xml",
+        "source": "com.tanguyantoine.react.react-native-music-control-core-1.0.2-1:/drawable/notification_bg_low.xml"
+    },
+    {
+        "merged": "com.tanguyantoine.react.react-native-music-control-merged_res-6:/drawable/next.xml",
+        "source": "com.tanguyantoine.react.react-native-music-control-main-7:/drawable/next.xml"
+    },
+    {
+        "merged": "com.tanguyantoine.react.react-native-music-control-merged_res-6:/drawable/skip_backward_10.xml",
+        "source": "com.tanguyantoine.react.react-native-music-control-main-7:/drawable/skip_backward_10.xml"
+    },
+    {
+        "merged": "com.tanguyantoine.react.react-native-music-control-merged_res-6:/drawable/previous.xml",
+        "source": "com.tanguyantoine.react.react-native-music-control-main-7:/drawable/previous.xml"
+    },
+    {
+        "merged": "com.tanguyantoine.react.react-native-music-control-merged_res-6:/drawable/skip_forward_5.xml",
+        "source": "com.tanguyantoine.react.react-native-music-control-main-7:/drawable/skip_forward_5.xml"
+    },
+    {
+        "merged": "com.tanguyantoine.react.react-native-music-control-merged_res-6:/drawable/play.xml",
+        "source": "com.tanguyantoine.react.react-native-music-control-main-7:/drawable/play.xml"
+    },
+    {
+        "merged": "com.tanguyantoine.react.react-native-music-control-merged_res-6:/drawable/stop.xml",
+        "source": "com.tanguyantoine.react.react-native-music-control-main-7:/drawable/stop.xml"
+    },
+    {
+        "merged": "com.tanguyantoine.react.react-native-music-control-merged_res-6:/drawable/skip_forward_10.xml",
+        "source": "com.tanguyantoine.react.react-native-music-control-main-7:/drawable/skip_forward_10.xml"
+    },
+    {
+        "merged": "com.tanguyantoine.react.react-native-music-control-merged_res-6:/drawable/notification_bg.xml",
+        "source": "com.tanguyantoine.react.react-native-music-control-core-1.0.2-1:/drawable/notification_bg.xml"
+    },
+    {
+        "merged": "com.tanguyantoine.react.react-native-music-control-merged_res-6:/drawable/skip_backward_5.xml",
+        "source": "com.tanguyantoine.react.react-native-music-control-main-7:/drawable/skip_backward_5.xml"
+    },
+    {
+        "merged": "com.tanguyantoine.react.react-native-music-control-merged_res-6:/drawable/notification_tile_bg.xml",
+        "source": "com.tanguyantoine.react.react-native-music-control-core-1.0.2-1:/drawable/notification_tile_bg.xml"
+    },
+    {
+        "merged": "com.tanguyantoine.react.react-native-music-control-merged_res-6:/drawable/pause.xml",
+        "source": "com.tanguyantoine.react.react-native-music-control-main-7:/drawable/pause.xml"
+    },
+    {
+        "merged": "com.tanguyantoine.react.react-native-music-control-merged_res-6:/drawable/skip_backward_30.xml",
+        "source": "com.tanguyantoine.react.react-native-music-control-main-7:/drawable/skip_backward_30.xml"
+    },
+    {
+        "merged": "com.tanguyantoine.react.react-native-music-control-merged_res-6:/drawable/notification_icon_background.xml",
+        "source": "com.tanguyantoine.react.react-native-music-control-core-1.0.2-1:/drawable/notification_icon_background.xml"
+    }
+]

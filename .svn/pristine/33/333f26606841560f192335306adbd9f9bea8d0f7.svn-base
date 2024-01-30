@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "com.rnimmersive.react-native-immersive-merged_res-20:/menu/example_menu.xml",
+        "source": "com.rnimmersive.react-native-immersive-core-1.7.0-5:/menu/example_menu.xml"
+    },
+    {
+        "merged": "com.rnimmersive.react-native-immersive-merged_res-20:/menu/example_menu2.xml",
+        "source": "com.rnimmersive.react-native-immersive-core-1.7.0-5:/menu/example_menu2.xml"
+    }
+]

@@ -1,0 +1,20 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.tanguyantoine.react" >
+4
+5    <uses-sdk android:minSdkVersion="21" />
+5-->G:\Op_Production\node_modules\react-native-music-control\android\src\main\AndroidManifest.xml
+6
+7    <application>
+7-->G:\Op_Production\node_modules\react-native-music-control\android\src\main\AndroidManifest.xml:4:5-6:19
+8        <service
+8-->G:\Op_Production\node_modules\react-native-music-control\android\src\main\AndroidManifest.xml:5:9-155
+9            android:name="com.tanguyantoine.react.MusicControlNotification$NotificationService"
+9-->G:\Op_Production\node_modules\react-native-music-control\android\src\main\AndroidManifest.xml:5:46-106
+10            android:foregroundServiceType="mediaPlayback"
+10-->G:\Op_Production\node_modules\react-native-music-control\android\src\main\AndroidManifest.xml:5:107-152
+11            android:stopWithTask="true" />
+11-->G:\Op_Production\node_modules\react-native-music-control\android\src\main\AndroidManifest.xml:5:18-45
+12    </application>
+13
+14</manifest>

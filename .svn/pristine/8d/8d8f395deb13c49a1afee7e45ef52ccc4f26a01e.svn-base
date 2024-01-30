@@ -1,0 +1,58 @@
+[
+    {
+        "merged": "com.op_production.app-merged_res-40:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.op_production.app-main-42:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.op_production.app-merged_res-40:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.op_production.app-main-42:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.op_production.app-merged_res-40:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.op_production.app-main-42:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.op_production.app-merged_res-40:/drawable_launch_screen.png.flat",
+        "source": "com.op_production.app-main-42:/drawable/launch_screen.png"
+    },
+    {
+        "merged": "com.op_production.app-merged_res-40:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.op_production.app-main-42:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.op_production.app-merged_res-40:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.op_production.app-main-42:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.op_production.app-merged_res-40:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.op_production.app-main-42:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.op_production.app-merged_res-40:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.op_production.app-main-42:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.op_production.app-merged_res-40:/raw_whoosh.mp3.flat",
+        "source": "com.op_production.app-main-42:/raw/whoosh.mp3"
+    },
+    {
+        "merged": "com.op_production.app-merged_res-40:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.op_production.app-main-42:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.op_production.app-merged_res-40:/layout_launch_screen.xml.flat",
+        "source": "com.op_production.app-main-42:/layout/launch_screen.xml"
+    },
+    {
+        "merged": "com.op_production.app-merged_res-40:/drawable_rn_edit_text_material.xml.flat",
+        "source": "com.op_production.app-main-42:/drawable/rn_edit_text_material.xml"
+    },
+    {
+        "merged": "com.op_production.app-merged_res-40:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.op_production.app-main-42:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.op_production.app-merged_res-40:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.op_production.app-main-42:/mipmap-xxxhdpi/ic_launcher_round.png"
+    }
+]

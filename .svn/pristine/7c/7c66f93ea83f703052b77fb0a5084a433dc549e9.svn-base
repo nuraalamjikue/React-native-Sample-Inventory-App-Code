@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "com.rnimmersive.react-native-immersive-merged_res-20:/layout-v21/notification_template_icon_group.xml",
+        "source": "com.rnimmersive.react-native-immersive-core-1.7.0-5:/layout-v21/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "com.rnimmersive.react-native-immersive-merged_res-20:/layout-v21/notification_template_custom_big.xml",
+        "source": "com.rnimmersive.react-native-immersive-core-1.7.0-5:/layout-v21/notification_template_custom_big.xml"
+    },
+    {
+        "merged": "com.rnimmersive.react-native-immersive-merged_res-20:/layout-v21/notification_action.xml",
+        "source": "com.rnimmersive.react-native-immersive-core-1.7.0-5:/layout-v21/notification_action.xml"
+    },
+    {
+        "merged": "com.rnimmersive.react-native-immersive-merged_res-20:/layout-v21/notification_action_tombstone.xml",
+        "source": "com.rnimmersive.react-native-immersive-core-1.7.0-5:/layout-v21/notification_action_tombstone.xml"
+    }
+]

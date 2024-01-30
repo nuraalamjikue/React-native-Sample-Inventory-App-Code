@@ -1,0 +1,237 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.op_production"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->G:\Op_Production\android\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="33" />
+9-->G:\Op_Production\android\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:3:5-67
+11-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:3:22-64
+12    <uses-permission android:name="android.permission.VIBRATE" />
+12-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:4:5-65
+12-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:4:22-63
+13    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+13-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:5:5-77
+13-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:5:22-74
+14    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+14-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:6:5-79
+14-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:6:22-77
+15    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+15-->[:react-native-community_netinfo] G:\Op_Production\node_modules\@react-native-community\netinfo\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:7:5-79
+15-->[:react-native-community_netinfo] G:\Op_Production\node_modules\@react-native-community\netinfo\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:7:22-76
+16    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+16-->[:react-native-community_netinfo] G:\Op_Production\node_modules\@react-native-community\netinfo\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:8:5-76
+16-->[:react-native-community_netinfo] G:\Op_Production\node_modules\@react-native-community\netinfo\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:8:22-73
+17    <uses-permission android:name="android.permission.CAMERA" />
+17-->[:react-native-camera] G:\Op_Production\node_modules\react-native-camera\android\build\intermediates\merged_manifest\generalRelease\AndroidManifest.xml:7:5-65
+17-->[:react-native-camera] G:\Op_Production\node_modules\react-native-camera\android\build\intermediates\merged_manifest\generalRelease\AndroidManifest.xml:7:22-62
+18
+19    <uses-feature
+19-->[:react-native-camera] G:\Op_Production\node_modules\react-native-camera\android\build\intermediates\merged_manifest\generalRelease\AndroidManifest.xml:9:5-11:36
+20        android:name="android.hardware.camera"
+20-->[:react-native-camera] G:\Op_Production\node_modules\react-native-camera\android\build\intermediates\merged_manifest\generalRelease\AndroidManifest.xml:10:9-47
+21        android:required="false" />
+21-->[:react-native-camera] G:\Op_Production\node_modules\react-native-camera\android\build\intermediates\merged_manifest\generalRelease\AndroidManifest.xml:11:9-33
+22    <uses-feature
+22-->[:react-native-camera] G:\Op_Production\node_modules\react-native-camera\android\build\intermediates\merged_manifest\generalRelease\AndroidManifest.xml:12:5-14:36
+23        android:name="android.hardware.camera.autofocus"
+23-->[:react-native-camera] G:\Op_Production\node_modules\react-native-camera\android\build\intermediates\merged_manifest\generalRelease\AndroidManifest.xml:13:9-57
+24        android:required="false" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+24-->[:react-native-camera] G:\Op_Production\node_modules\react-native-camera\android\build\intermediates\merged_manifest\generalRelease\AndroidManifest.xml:14:9-33
+25    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+25-->[com.google.android.gms:play-services-iid:17.0.0] C:\Users\Jikue\.gradle\caches\transforms-3\d23697d3ddc319769c3d2a6565d52bbc\transformed\jetified-play-services-iid-17.0.0\AndroidManifest.xml:23:5-82
+25-->[com.google.android.gms:play-services-iid:17.0.0] C:\Users\Jikue\.gradle\caches\transforms-3\d23697d3ddc319769c3d2a6565d52bbc\transformed\jetified-play-services-iid-17.0.0\AndroidManifest.xml:23:22-79
+26    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+26-->[com.android.installreferrer:installreferrer:1.1.2] C:\Users\Jikue\.gradle\caches\transforms-3\7159fdde894990131f3ba6437117d8d3\transformed\jetified-installreferrer-1.1.2\AndroidManifest.xml:9:5-110
+26-->[com.android.installreferrer:installreferrer:1.1.2] C:\Users\Jikue\.gradle\caches\transforms-3\7159fdde894990131f3ba6437117d8d3\transformed\jetified-installreferrer-1.1.2\AndroidManifest.xml:9:22-107
+27
+28    <application
+28-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:9:5-32:19
+29        android:name="com.op_production.MainApplication"
+29-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:10:7-38
+30        android:allowBackup="false"
+30-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:14:7-34
+31        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+31-->[androidx.core:core:1.8.0] C:\Users\Jikue\.gradle\caches\transforms-3\9623e378e4dfc57c47793d0ffd25ee05\transformed\core-1.8.0\AndroidManifest.xml:24:18-86
+32        android:icon="@mipmap/ic_launcher"
+32-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:12:7-41
+33        android:label="@string/app_name"
+33-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:11:7-39
+34        android:roundIcon="@mipmap/ic_launcher_round"
+34-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:13:7-52
+35        android:theme="@style/AppTheme"
+35-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:16:7-38
+36        android:usesCleartextTraffic="true" >
+36-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:15:7-42
+37        <activity
+37-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:17:7-31:18
+38            android:name="com.op_production.MainActivity"
+38-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:19:9-37
+39            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+39-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:21:9-118
+40            android:exported="true"
+40-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:26:9-32
+41            android:label="@string/app_name"
+41-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:20:9-41
+42            android:launchMode="singleTask"
+42-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:22:9-40
+43            android:screenOrientation="portrait"
+43-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:25:9-45
+44            android:usesCleartextTraffic="true"
+44-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:24:9-44
+45            android:windowSoftInputMode="adjustResize" >
+45-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:23:9-51
+46            <intent-filter>
+46-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:27:9-30:25
+47                <action android:name="android.intent.action.MAIN" />
+47-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:28:13-65
+47-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:28:21-62
+48
+49                <category android:name="android.intent.category.LAUNCHER" />
+49-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:29:13-73
+49-->G:\Op_Production\android\app\src\main\AndroidManifest.xml:29:23-70
+50            </intent-filter>
+51        </activity>
+52
+53        <service
+53-->[:react-native-music-control] G:\Op_Production\node_modules\react-native-music-control\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:8:9-11:43
+54            android:name="com.tanguyantoine.react.MusicControlNotification$NotificationService"
+54-->[:react-native-music-control] G:\Op_Production\node_modules\react-native-music-control\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:9:13-96
+55            android:foregroundServiceType="mediaPlayback"
+55-->[:react-native-music-control] G:\Op_Production\node_modules\react-native-music-control\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:10:13-58
+56            android:stopWithTask="true" />
+56-->[:react-native-music-control] G:\Op_Production\node_modules\react-native-music-control\android\build\intermediates\merged_manifest\release\AndroidManifest.xml:11:13-40
+57        <service
+57-->[com.google.android.gms:play-services-mlkit-barcode-scanning:16.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\97799781954acc3d7354150c72b84ae2\transformed\jetified-play-services-mlkit-barcode-scanning-16.2.0\AndroidManifest.xml:9:9-15:19
+58            android:name="com.google.mlkit.common.internal.MlKitComponentDiscoveryService"
+58-->[com.google.android.gms:play-services-mlkit-barcode-scanning:16.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\97799781954acc3d7354150c72b84ae2\transformed\jetified-play-services-mlkit-barcode-scanning-16.2.0\AndroidManifest.xml:10:13-91
+59            android:directBootAware="true"
+59-->[com.google.mlkit:common:17.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\53ad5d231868f74729b71d2d86f60f8e\transformed\jetified-common-17.2.0\AndroidManifest.xml:17:13-43
+60            android:exported="false" >
+60-->[com.google.android.gms:play-services-mlkit-barcode-scanning:16.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\97799781954acc3d7354150c72b84ae2\transformed\jetified-play-services-mlkit-barcode-scanning-16.2.0\AndroidManifest.xml:11:13-37
+61            <meta-data
+61-->[com.google.android.gms:play-services-mlkit-barcode-scanning:16.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\97799781954acc3d7354150c72b84ae2\transformed\jetified-play-services-mlkit-barcode-scanning-16.2.0\AndroidManifest.xml:12:13-14:85
+62                android:name="com.google.firebase.components:com.google.mlkit.vision.barcode.internal.BarcodeRegistrar"
+62-->[com.google.android.gms:play-services-mlkit-barcode-scanning:16.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\97799781954acc3d7354150c72b84ae2\transformed\jetified-play-services-mlkit-barcode-scanning-16.2.0\AndroidManifest.xml:13:17-120
+63                android:value="com.google.firebase.components.ComponentRegistrar" />
+63-->[com.google.android.gms:play-services-mlkit-barcode-scanning:16.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\97799781954acc3d7354150c72b84ae2\transformed\jetified-play-services-mlkit-barcode-scanning-16.2.0\AndroidManifest.xml:14:17-82
+64            <meta-data
+64-->[com.google.android.gms:play-services-mlkit-face-detection:16.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\b9f3389d51c178b8d896d7baeb40c059\transformed\jetified-play-services-mlkit-face-detection-16.2.0\AndroidManifest.xml:12:13-14:85
+65                android:name="com.google.firebase.components:com.google.mlkit.vision.face.internal.FaceRegistrar"
+65-->[com.google.android.gms:play-services-mlkit-face-detection:16.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\b9f3389d51c178b8d896d7baeb40c059\transformed\jetified-play-services-mlkit-face-detection-16.2.0\AndroidManifest.xml:13:17-114
+66                android:value="com.google.firebase.components.ComponentRegistrar" />
+66-->[com.google.android.gms:play-services-mlkit-face-detection:16.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\b9f3389d51c178b8d896d7baeb40c059\transformed\jetified-play-services-mlkit-face-detection-16.2.0\AndroidManifest.xml:14:17-82
+67            <meta-data
+67-->[com.google.android.gms:play-services-mlkit-text-recognition:16.3.0] C:\Users\Jikue\.gradle\caches\transforms-3\b92474410cc7ebbd2fad55921816aa5f\transformed\jetified-play-services-mlkit-text-recognition-16.3.0\AndroidManifest.xml:12:13-14:85
+68                android:name="com.google.firebase.components:com.google.mlkit.vision.text.internal.TextRegistrar"
+68-->[com.google.android.gms:play-services-mlkit-text-recognition:16.3.0] C:\Users\Jikue\.gradle\caches\transforms-3\b92474410cc7ebbd2fad55921816aa5f\transformed\jetified-play-services-mlkit-text-recognition-16.3.0\AndroidManifest.xml:13:17-114
+69                android:value="com.google.firebase.components.ComponentRegistrar" />
+69-->[com.google.android.gms:play-services-mlkit-text-recognition:16.3.0] C:\Users\Jikue\.gradle\caches\transforms-3\b92474410cc7ebbd2fad55921816aa5f\transformed\jetified-play-services-mlkit-text-recognition-16.3.0\AndroidManifest.xml:14:17-82
+70            <meta-data
+70-->[com.google.mlkit:vision-common:16.5.0] C:\Users\Jikue\.gradle\caches\transforms-3\b86801a92097a5dcc8fcd3577b45f061\transformed\jetified-vision-common-16.5.0\AndroidManifest.xml:12:13-14:85
+71                android:name="com.google.firebase.components:com.google.mlkit.vision.common.internal.VisionCommonRegistrar"
+71-->[com.google.mlkit:vision-common:16.5.0] C:\Users\Jikue\.gradle\caches\transforms-3\b86801a92097a5dcc8fcd3577b45f061\transformed\jetified-vision-common-16.5.0\AndroidManifest.xml:13:17-124
+72                android:value="com.google.firebase.components.ComponentRegistrar" />
+72-->[com.google.mlkit:vision-common:16.5.0] C:\Users\Jikue\.gradle\caches\transforms-3\b86801a92097a5dcc8fcd3577b45f061\transformed\jetified-vision-common-16.5.0\AndroidManifest.xml:14:17-82
+73            <meta-data
+73-->[com.google.mlkit:common:17.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\53ad5d231868f74729b71d2d86f60f8e\transformed\jetified-common-17.2.0\AndroidManifest.xml:20:13-22:85
+74                android:name="com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar"
+74-->[com.google.mlkit:common:17.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\53ad5d231868f74729b71d2d86f60f8e\transformed\jetified-common-17.2.0\AndroidManifest.xml:21:17-120
+75                android:value="com.google.firebase.components.ComponentRegistrar" />
+75-->[com.google.mlkit:common:17.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\53ad5d231868f74729b71d2d86f60f8e\transformed\jetified-common-17.2.0\AndroidManifest.xml:22:17-82
+76        </service>
+77
+78        <provider
+78-->[com.google.mlkit:common:17.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\53ad5d231868f74729b71d2d86f60f8e\transformed\jetified-common-17.2.0\AndroidManifest.xml:9:9-13:38
+79            android:name="com.google.mlkit.common.internal.MlKitInitProvider"
+79-->[com.google.mlkit:common:17.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\53ad5d231868f74729b71d2d86f60f8e\transformed\jetified-common-17.2.0\AndroidManifest.xml:10:13-78
+80            android:authorities="com.op_production.mlkitinitprovider"
+80-->[com.google.mlkit:common:17.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\53ad5d231868f74729b71d2d86f60f8e\transformed\jetified-common-17.2.0\AndroidManifest.xml:11:13-69
+81            android:exported="false"
+81-->[com.google.mlkit:common:17.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\53ad5d231868f74729b71d2d86f60f8e\transformed\jetified-common-17.2.0\AndroidManifest.xml:12:13-37
+82            android:initOrder="99" />
+82-->[com.google.mlkit:common:17.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\53ad5d231868f74729b71d2d86f60f8e\transformed\jetified-common-17.2.0\AndroidManifest.xml:13:13-35
+83
+84        <activity
+84-->[com.google.android.gms:play-services-base:17.6.0] C:\Users\Jikue\.gradle\caches\transforms-3\795676a79a0c8e1cc25c8530d5bb032b\transformed\jetified-play-services-base-17.6.0\AndroidManifest.xml:23:9-26:75
+85            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+85-->[com.google.android.gms:play-services-base:17.6.0] C:\Users\Jikue\.gradle\caches\transforms-3\795676a79a0c8e1cc25c8530d5bb032b\transformed\jetified-play-services-base-17.6.0\AndroidManifest.xml:24:13-79
+86            android:exported="false"
+86-->[com.google.android.gms:play-services-base:17.6.0] C:\Users\Jikue\.gradle\caches\transforms-3\795676a79a0c8e1cc25c8530d5bb032b\transformed\jetified-play-services-base-17.6.0\AndroidManifest.xml:25:13-37
+87            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+87-->[com.google.android.gms:play-services-base:17.6.0] C:\Users\Jikue\.gradle\caches\transforms-3\795676a79a0c8e1cc25c8530d5bb032b\transformed\jetified-play-services-base-17.6.0\AndroidManifest.xml:26:13-72
+88
+89        <meta-data
+89-->[com.google.android.gms:play-services-basement:17.6.0] C:\Users\Jikue\.gradle\caches\transforms-3\b63984d3b045444cdc55f8997826a36d\transformed\jetified-play-services-basement-17.6.0\AndroidManifest.xml:23:9-25:69
+90            android:name="com.google.android.gms.version"
+90-->[com.google.android.gms:play-services-basement:17.6.0] C:\Users\Jikue\.gradle\caches\transforms-3\b63984d3b045444cdc55f8997826a36d\transformed\jetified-play-services-basement-17.6.0\AndroidManifest.xml:24:13-58
+91            android:value="@integer/google_play_services_version" />
+91-->[com.google.android.gms:play-services-basement:17.6.0] C:\Users\Jikue\.gradle\caches\transforms-3\b63984d3b045444cdc55f8997826a36d\transformed\jetified-play-services-basement-17.6.0\AndroidManifest.xml:25:13-66
+92
+93        <provider
+93-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\259206a491dfa4b8b6052b2b1c41d979\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+94            android:name="androidx.startup.InitializationProvider"
+94-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\259206a491dfa4b8b6052b2b1c41d979\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:25:13-67
+95            android:authorities="com.op_production.androidx-startup"
+95-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\259206a491dfa4b8b6052b2b1c41d979\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:26:13-68
+96            android:exported="false" >
+96-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\259206a491dfa4b8b6052b2b1c41d979\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:27:13-37
+97            <meta-data
+97-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\259206a491dfa4b8b6052b2b1c41d979\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+98                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+98-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\259206a491dfa4b8b6052b2b1c41d979\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:30:17-75
+99                android:value="androidx.startup" />
+99-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Jikue\.gradle\caches\transforms-3\259206a491dfa4b8b6052b2b1c41d979\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:31:17-49
+100            <meta-data
+100-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Jikue\.gradle\caches\transforms-3\b1c537e6049df5a2dcb1a9b20b1a8868\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+101                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+101-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Jikue\.gradle\caches\transforms-3\b1c537e6049df5a2dcb1a9b20b1a8868\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+102                android:value="androidx.startup" />
+102-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Jikue\.gradle\caches\transforms-3\b1c537e6049df5a2dcb1a9b20b1a8868\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+103        </provider>
+104
+105        <meta-data
+105-->[com.facebook.soloader:soloader:0.10.5] C:\Users\Jikue\.gradle\caches\transforms-3\ec3312a013bd7d8a70466a1977a1dba4\transformed\jetified-soloader-0.10.5\AndroidManifest.xml:12:9-14:37
+106            android:name="com.facebook.soloader.enabled"
+106-->[com.facebook.soloader:soloader:0.10.5] C:\Users\Jikue\.gradle\caches\transforms-3\ec3312a013bd7d8a70466a1977a1dba4\transformed\jetified-soloader-0.10.5\AndroidManifest.xml:13:13-57
+107            android:value="false" />
+107-->[com.facebook.soloader:soloader:0.10.5] C:\Users\Jikue\.gradle\caches\transforms-3\ec3312a013bd7d8a70466a1977a1dba4\transformed\jetified-soloader-0.10.5\AndroidManifest.xml:14:13-34
+108
+109        <service
+109-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Jikue\.gradle\caches\transforms-3\e39449332b16abbff71917ad5661bdd3\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:29:9-35:19
+110            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+110-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Jikue\.gradle\caches\transforms-3\e39449332b16abbff71917ad5661bdd3\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:30:13-103
+111            android:exported="false" >
+111-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Jikue\.gradle\caches\transforms-3\e39449332b16abbff71917ad5661bdd3\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:31:13-37
+112            <meta-data
+112-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Jikue\.gradle\caches\transforms-3\e39449332b16abbff71917ad5661bdd3\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:32:13-34:39
+113                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+113-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Jikue\.gradle\caches\transforms-3\e39449332b16abbff71917ad5661bdd3\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:33:17-94
+114                android:value="cct" />
+114-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Jikue\.gradle\caches\transforms-3\e39449332b16abbff71917ad5661bdd3\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:34:17-36
+115        </service>
+116        <service
+116-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Jikue\.gradle\caches\transforms-3\5b4aa339182f7c0c9798b03e5e65fdd0\transformed\jetified-transport-runtime-2.2.6\AndroidManifest.xml:26:9-30:19
+117            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+117-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Jikue\.gradle\caches\transforms-3\5b4aa339182f7c0c9798b03e5e65fdd0\transformed\jetified-transport-runtime-2.2.6\AndroidManifest.xml:27:13-117
+118            android:exported="false"
+118-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Jikue\.gradle\caches\transforms-3\5b4aa339182f7c0c9798b03e5e65fdd0\transformed\jetified-transport-runtime-2.2.6\AndroidManifest.xml:28:13-37
+119            android:permission="android.permission.BIND_JOB_SERVICE" >
+119-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Jikue\.gradle\caches\transforms-3\5b4aa339182f7c0c9798b03e5e65fdd0\transformed\jetified-transport-runtime-2.2.6\AndroidManifest.xml:29:13-69
+120        </service>
+121
+122        <receiver
+122-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Jikue\.gradle\caches\transforms-3\5b4aa339182f7c0c9798b03e5e65fdd0\transformed\jetified-transport-runtime-2.2.6\AndroidManifest.xml:32:9-34:40
+123            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+123-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Jikue\.gradle\caches\transforms-3\5b4aa339182f7c0c9798b03e5e65fdd0\transformed\jetified-transport-runtime-2.2.6\AndroidManifest.xml:33:13-132
+124            android:exported="false" />
+124-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Jikue\.gradle\caches\transforms-3\5b4aa339182f7c0c9798b03e5e65fdd0\transformed\jetified-transport-runtime-2.2.6\AndroidManifest.xml:34:13-37
+125    </application>
+126
+127</manifest>
