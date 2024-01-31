@@ -52,7 +52,7 @@ const Opareto_Qr_scanner = () => {
       instance
         .get(`/Op_Production_Calc/Sample_Planning_Data/${e.data}`)
         .then(response => {
-          console.log('data scan', JSON.stringify(response.data));
+          // console.log('data scan', JSON.stringify(response.data));
 
           setTableData(response.data);
         })

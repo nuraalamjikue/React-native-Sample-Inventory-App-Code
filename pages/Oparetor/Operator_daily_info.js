@@ -26,6 +26,7 @@ import {Table, Row} from 'react-native-table-component';
 import moment from 'moment';
 
 import {LogBox} from 'react-native';
+import SampleProblemList from './SampleProblemList';
 
 LogBox.ignoreLogs(['new NativeEventEmitter']); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
@@ -66,6 +67,10 @@ const Operator_daily_info = ({navigation, route}) => {
   const [Dialog, setDialog] = useState(false);
   const [Dialogpart, setDialogpart] = useState(false);
   const [partComplete, setPartComplete] = useState(false);
+  const [DownTimeModel, setDownTimeModel] = useState(false);
+  const [DownTimeModelTimeCount, setDownTimeModelTimeCount] = useState(false);
+  const [DownTimeProblemName, setDownTimeProblemName] = useState('');
+  const [DownTimeProblemID, setDownTimeProblemID] = useState('');
   const [resetData, setResetData] = useState(0);
   const [ColorsCode, setColorsCode] = useState(0);
   const [totaluseTime, setTotaluseTime] = useState(0);
@@ -77,7 +82,7 @@ const Operator_daily_info = ({navigation, route}) => {
   const [totalSMV, setTotalSMV] = useState(null);
   const [totalpartList, setTotalpartList] = useState(0);
   const [totalpartDone, setTotalpartDone] = useState(0);
-
+  const [DownTimeData, setDownTimeData] = useState(['']);
   const deviceHeight = Dimensions.get('window').height;
   var textFontSize20 = deviceHeight * 0.022;
   var textFontSize15 = deviceHeight * 0.015;
@@ -108,6 +113,10 @@ const Operator_daily_info = ({navigation, route}) => {
     setRunning(!running);
   };
 
+  const handlePause = () => {
+    setRunning(false);
+  };
+
   const formatTime = time => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
@@ -134,7 +143,7 @@ const Operator_daily_info = ({navigation, route}) => {
     clearInterval(intervalRef.current);
     setTime(0);
     setRunning(false);
-    console.log('hiding');
+    //console.log('hiding');
   };
 
   // -----------------------------------------------------------
@@ -145,18 +154,7 @@ const Operator_daily_info = ({navigation, route}) => {
   const _handleMore = () => {
     openMenu();
   };
-  const setColorvalueRed = () => {
-    setColorsCode(1);
-    closeMenu();
-  };
-  const setColorvalueYellow = () => {
-    setColorsCode(2);
-    closeMenu();
-  };
-  const setColorvalueDefault = () => {
-    setColorsCode(0);
-    closeMenu();
-  };
+
   const handleResetall = () => {
     setResetData(1);
     setDialog(true);
@@ -186,7 +184,7 @@ const Operator_daily_info = ({navigation, route}) => {
   const handleMenuPress = () => {
     // Handle menu item press
     closeMenu();
-    console.log('Menu item pressed');
+    //console.log('Menu item pressed');
   };
   const logouthendel = () => {
     navigation.navigate('TabsPage');
@@ -240,7 +238,7 @@ const Operator_daily_info = ({navigation, route}) => {
         `/Op_Production_Calc/getTotalWorkingMin/${getBuyerName}/${getstyleNo}/${getSeasonName}/${getLineName}/${employeeID}`,
       )
       .then(response => {
-        console.log('data_____', JSON.stringify(response.data));
+        //console.log('data_____', JSON.stringify(response.data));
         var result = response.data[0];
 
         setTotaluseTime(result.workSMV);
@@ -268,7 +266,7 @@ const Operator_daily_info = ({navigation, route}) => {
         `/Op_Production_Calc/getPartName/${getBuyerName}/${getstyleNo}/${getSeasonName}/${getLineName}/${employeeID}`,
       )
       .then(response => {
-        console.log('data', JSON.stringify(response.data));
+        // console.log('data', JSON.stringify(response.data));
         setTableData(response.data);
         var result = response.data[0];
 
@@ -283,31 +281,8 @@ const Operator_daily_info = ({navigation, route}) => {
         const totalSMV = response.data.reduce((acc, item) => acc + item.SMV, 0);
         setTotalSMV(totalSMV.toFixed(2));
 
-        // Filter items where TotalPartEntry > 0
-        // const filteredData = response.data.filter(
-        //   item => item.TotalPartEntry > 0,
-        // );
-
-        // // Calculate total SMV for the filtered items
-        // const totalworkpart = filteredData.length;
-
-        // setTotalpartDone(totalworkpart);
-
         const totalElements = response.data.length;
         setTotalpartList(totalElements);
-
-        // const totalPartEntryData = response.data.reduce((acc, item) => {
-        //   // Check if TotalPartEntry is greater than 0 before adding to the accumulator
-        //   if (item.TotalPartEntry > 0 && item.TotalPartEntry < 1) {
-        //     return acc + item.TotalPartEntry;
-        //   } else if (item.TotalPartEntry > 1) {
-        //     return 1 - item.TotalPartEntry;
-        //   }
-        //   return acc;
-        // }, 0);
-
-        // setTotalpartDone(totalPartEntryData);
-        // console.log('TotalPartEntry:', totalPartEntryData);
       })
       .catch(e => {
         console.log(e);
@@ -319,9 +294,9 @@ const Operator_daily_info = ({navigation, route}) => {
         `/Op_Production_Calc/getPartName/${getBuyerName}/${getstyleNo}/${getSeasonName}/${getLineName}/${employeeID}`,
       )
       .then(response => {
-        console.log('data', JSON.stringify(response.data));
+        // onsole.log('data', JSON.stringify(response.data));
         const totalElements = response.data.length;
-        console.log('Total elements in the array:', totalElements);
+        //onsole.log('Total elements in the array:', totalElements);
 
         setTotalpartList(totalElements);
 
@@ -412,6 +387,60 @@ const Operator_daily_info = ({navigation, route}) => {
       BackHandler.removeEventListener('hardwareBackPress', handleBackButton);
     };
   }, []);
+
+  const DownTimeModelData = () => {
+    instance
+      .get(`/Op_Production_Calc/getDownTimeProblemList`)
+      .then(response => {
+        const Downtimes = response.data;
+        setDownTimeData(Downtimes);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
+  const handleDownTimeList = rowData => {
+    console.log('handleDownTimeList' + JSON.stringify(rowData));
+    setDownTimeProblemName(rowData.DownTimeProblemList);
+    setDownTimeProblemID(rowData.Id);
+    setDownTimeModelTimeCount(true);
+  };
+
+  const [DownTimeCount, setDownTimeCount] = useState(null);
+
+  const handleDataFromChild = data => {
+    // Handle the data received from the child page
+    console.log('Data from child:', data);
+    setDownTimeCount(data);
+  };
+
+  const closeModal = () => {
+    console.log('DownTimeProblemID' + DownTimeProblemID);
+    console.log('DownTimeCount' + DownTimeCount);
+    var data_new = {
+      employeeID: employeeID,
+      downTimeProblemID: parseInt(DownTimeProblemID),
+      useTime: parseInt(DownTimeCount),
+      styleNo: getstyleNo,
+      season: getSeasonName,
+      sampletype: getSampleType,
+      lineName: getLineName,
+      buyerName: getBuyerName,
+      cretaeBy: employeeID,
+      createDate: new Date(),
+    };
+
+    instance.post('/DownTimeProblem', JSON.stringify(data_new)).then(res => {
+      {
+        res.data > 0 ? soundStart() : errormsg();
+      }
+    });
+
+    setDownTimeModelTimeCount(false);
+    setDownTimeModel(false);
+    startStopwatch();
+  };
 
   useEffect(() => {
     setStatusBarStyle(STYLES[ColorsCode]);
@@ -690,6 +719,69 @@ const Operator_daily_info = ({navigation, route}) => {
     setTime(0);
     setRunning(!running);
   };
+  const deviceVersion = DeviceInfo.getVersion();
+  const tableHeadDownTime = [
+    <Text
+      style={{
+        color: '#fff',
+        fontSize: textFontSize15,
+        marginLeft: 5,
+        fontWeight: 'bold',
+      }}>
+      Sl
+    </Text>,
+    <Text
+      style={{
+        color: '#fff',
+        fontSize: textFontSize15,
+        marginLeft: 5,
+        fontWeight: 'bold',
+        textAlign: 'center',
+      }}>
+      Down Time Problem List
+    </Text>,
+  ];
+
+  const tableDataRowsDownTime = DownTimeData.map((rowData, index) => (
+    <Row
+      key={index}
+      data={[
+        <Text style={{color: '#fff', fontSize: textFontSize15, marginLeft: 5}}>
+          {index + 1}
+        </Text>,
+
+        <Pressable
+          style={{
+            width: '100%',
+            height: 30,
+            justifyContent: 'center',
+            alignContent: 'center',
+            borderRadius: 5,
+          }}
+          onPress={() => {
+            handleDownTimeList(rowData);
+            //addToList(item)
+          }}>
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: textFontSize15,
+              textAlign: 'center',
+              justifyContent: 'center',
+              alignContent: 'center',
+            }}>
+            {rowData.DownTimeProblemList}
+          </Text>
+        </Pressable>,
+      ]}
+      widthArr={[20, 300]}
+      style={[
+        styles.row,
+        rowData.TotalPartEntry === 0 ? null : {backgroundColor: '#00999A'},
+      ]}
+      textStyle={styles.text}
+    />
+  ));
 
   const tableHead = [
     <Text
@@ -755,7 +847,8 @@ const Operator_daily_info = ({navigation, route}) => {
           {rowData.TotalPartEntry}
         </Text>,
 
-        getSampleQty !== rowData.TotalPartEntry ? (
+        getSampleQty !== rowData.TotalPartEntry &&
+        getSampleQty > rowData.TotalPartEntry ? (
           <Pressable
             style={{
               width: 50,
@@ -795,7 +888,7 @@ const Operator_daily_info = ({navigation, route}) => {
             onPress={() => {
               setPartComplete(true);
               setDialogpart(false);
-              console.log('hi');
+              //console.log('hi');
             }}>
             <Text
               style={{
@@ -853,9 +946,7 @@ const Operator_daily_info = ({navigation, route}) => {
               width: 150,
             }}>
             <Menu.Item onPress={logouthendel} title="Logout" />
-            <Menu.Item onPress={setColorvalueRed} title="Red" />
-            <Menu.Item onPress={setColorvalueYellow} title="Yellow" />
-            <Menu.Item onPress={setColorvalueDefault} title="Default" />
+
             <Menu.Item onPress={handleMenuPress} title="Production Complete" />
             <Menu.Item onPress={handleDayend} title="Day End" />
             <Menu.Item onPress={handleResetall} title="Reset" />
@@ -1028,46 +1119,6 @@ const Operator_daily_info = ({navigation, route}) => {
               <View style={styles.line}></View>
             </View>
           </View>
-
-          {/* <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <View>
-              <Text
-                style={{
-                  color: '#fff',
-                  fontSize: 35,
-                  fontWeight: 'bold',
-                  textAlign: 'center',
-                  marginTop: -10,
-                }}>
-                {totalpartList}{' '}
-                <Text
-                  style={{
-                    color: '#fff',
-                    fontSize: 45,
-                    fontWeight: 'bold',
-                    textAlign: 'center',
-                  }}>
-                  /
-                </Text>
-              </Text>
-            </View>
-            <View style={{marginLeft: 5}}>
-              <Text
-                style={{
-                  color: '#fff',
-                  fontSize: 35,
-                  fontWeight: 'bold',
-                  textAlign: 'center',
-                }}>
-                {totalpartDone}
-              </Text>
-            </View>
-          </View> */}
         </View>
         <View
           style={{
@@ -1232,34 +1283,35 @@ const Operator_daily_info = ({navigation, route}) => {
       </Text>
 
       {/* ---------------------Per Pcs Production------------------------- */}
+
       <View style={{flexDirection: 'row', marginTop: 3}}>
-        <View style={{width: '50%'}}>
-          <Text
-            style={{
-              backgroundColor: '#892E88',
-              color: '#fff',
-              textAlign: 'center',
-              fontSize: 12,
-              fontWeight: 'bold',
-            }}>
-            {' '}
-            Per Pcs Production{' '}
-          </Text>
-        </View>
-        <View style={{width: '50%', marginLeft: 10}}>
-          <Text
-            style={{
-              backgroundColor: '#892E88',
-              color: '#fff',
-              textAlign: 'center',
-              fontSize: 12,
-              fontWeight: 'bold',
-            }}>
-            {' '}
-            Bundle Production{' '}
-          </Text>
-        </View>
+        <Text
+          style={{
+            backgroundColor: '#892E88',
+            color: '#fff',
+            textAlign: 'center',
+            fontSize: 12,
+            paddingLeft: '20%',
+            fontWeight: 'bold',
+            width: '70%',
+          }}>
+          {' '}
+          Per Pcs Production
+        </Text>
+        <Text
+          style={{
+            backgroundColor: '#892E88',
+            color: '#fff',
+            textAlign: 'center',
+            fontSize: 12,
+            fontWeight: 'bold',
+            width: '30%',
+          }}>
+          {' '}
+          <Text> Version : {deviceVersion}</Text>
+        </Text>
       </View>
+
       {/* ---------------------------------------------- */}
       {/* -----------------Use Time area----------------------------- */}
       <Toast />
@@ -1281,7 +1333,7 @@ const Operator_daily_info = ({navigation, route}) => {
         <View
           style={{
             height: 100,
-            width: '100%',
+            width: '75%',
             backgroundColor: '#003D75',
             borderRadius: 10,
             elevation: 15,
@@ -1315,9 +1367,9 @@ const Operator_daily_info = ({navigation, route}) => {
                     startStopwatch();
                   }}>
                   {lowestTotalPartEntry == 0 ? (
-                    <Text style={{fontSize: 40, paddingTop: 25}}>GMT PART</Text>
+                    <Text style={{fontSize: 30, paddingTop: 25}}>GMT PART</Text>
                   ) : (
-                    <Text style={{fontSize: 40, paddingTop: 25}}>
+                    <Text style={{fontSize: 30, paddingTop: 25}}>
                       {lowestTotalPartEntry}
                     </Text>
                   )}
@@ -1348,7 +1400,7 @@ const Operator_daily_info = ({navigation, route}) => {
           ) : (
             <Button
               style={{justifyContent: 'center', paddingTop: 5, height: '90%'}}
-              labelStyle={{fontSize: 55, color: '#fff'}}
+              labelStyle={{fontSize: 50, color: '#fff'}}
               icon="plus-circle"
               mode="text"
               onPress={() => {
@@ -1365,60 +1417,24 @@ const Operator_daily_info = ({navigation, route}) => {
             </Button>
           )}
         </View>
-        {/* <View
-          style={{
-            height: 100,
-            width: '20%',
-            backgroundColor: '#E51B1F',
-            borderRadius: 8,
-            elevation: 15,
-            marginLeft: 2,
-          }}>
+
+        <View style={{height: 100, width: '15%', marginLeft: '1%'}}>
           <Button
             style={{
-              justifyContent: 'center',
-              alignContent: 'center',
-              marginLeft: 8,
+              alignSelf: 'center',
+
+              backgroundColor: Achived_Efficency > 10 ? 'red' : '#1974D2',
+              marginLeft: '80%',
             }}
-            labelStyle={{fontSize: 50, color: '#fff', paddingTop: 20}}
-            icon="minus-circle"
+            labelStyle={{fontSize: 80, color: '#fff'}}
+            icon="cellphone-basic"
             mode="text"
             onPress={() => {
-              setDialog(true);
-              setResetData(0);
+              setDownTimeModel(true);
+              DownTimeModelData();
+              handlePause();
             }}></Button>
         </View>
-        <View
-          style={{
-            height: 100,
-            width: '20%',
-            backgroundColor: '#E51B1F',
-            borderRadius: 8,
-            elevation: 15,
-            marginLeft: 2,
-          }}>
-          <Button
-            style={{
-              justifyContent: 'center',
-              alignContent: 'center',
-              marginLeft: 8,
-            }}
-            labelStyle={{fontSize: 45, color: '#fff'}}
-            mode="text"
-            onPress={() => {
-              setResetData(1);
-              setDialog(true);
-            }}>
-            <Text
-              style={{
-                fontSize: 13,
-                paddingTop: 30,
-                marginLeft: -4,
-              }}>
-              Reset
-            </Text>
-          </Button>
-        </View> */}
       </View>
 
       {/* ------------------------------------------model-------------------------------------------------------- */}
@@ -1472,7 +1488,7 @@ const Operator_daily_info = ({navigation, route}) => {
                   onPress={() => {
                     {
                       resetData === 1 ? ResetallCounter() : decrementCounter();
-                      console.log('check again' + resetData);
+                      //console.log('check again' + resetData);
                     }
                   }}
                   style={{
@@ -1589,6 +1605,130 @@ const Operator_daily_info = ({navigation, route}) => {
                     height: 35,
                   }}>
                   Cancel
+                </Button>
+              </View>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
+      {/* ------------------------------------------model for Down Time-------------------------------------------------------- */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={DownTimeModel}
+        onRequestClose={() => {
+          setDownTimeModel(!DownTimeModel);
+        }}>
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <View style={styles.centeredView2}>
+            <ScrollView horizontal={true}>
+              <View style={{width: '100%'}}>
+                <Table borderStyle={{borderColor: 'black'}}>
+                  <Row
+                    data={tableHeadDownTime}
+                    widthArr={[20, 330]}
+                    style={styles.header}
+                    textStyle={styles.headertext}
+                  />
+                </Table>
+                <ScrollView style={{height: 350}}>
+                  <Table borderStyle={{borderColor: 'black'}}>
+                    {tableDataRowsDownTime}
+                  </Table>
+                </ScrollView>
+              </View>
+            </ScrollView>
+
+            <View
+              style={{
+                flexDirection: 'row',
+                margin: 5,
+                marginBottom: 25,
+              }}>
+              <View style={{width: '100%'}}>
+                <Button
+                  mode="text"
+                  onPress={() => {
+                    setDownTimeModel(!DownTimeModel);
+                    startStopwatch();
+                  }}
+                  style={{
+                    backgroundColor: '#fff',
+                    width: '100%',
+                    borderRadius: 8,
+                    height: 35,
+                  }}>
+                  Cancel
+                </Button>
+              </View>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
+      {/* ------------------------------------------model for Down Time-------------------------------------------------------- */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={DownTimeModelTimeCount}
+        onRequestClose={() => {
+          setDownTimeModelTimeCount(!DownTimeModelTimeCount);
+        }}>
+        <View
+          style={{
+            flex: 1,
+            height: '100%',
+            width: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)', // You can customize the background color and transparency here
+          }}>
+          <View style={styles.centeredView2}>
+            <ScrollView horizontal={true}>
+              <SampleProblemList
+                onClose={closeModal}
+                dataArray={[
+                  getEmployeeName,
+                  employeeID,
+                  getBuyerName,
+                  getSeasonName,
+                ]}
+                Data={DownTimeProblemName}
+                onDataFromChild={handleDataFromChild}
+              />
+            </ScrollView>
+
+            <View
+              style={{
+                flexDirection: 'row',
+                margin: 5,
+                marginBottom: 25,
+              }}>
+              <View style={{width: '100%'}}>
+                <Button
+                  mode="text"
+                  onPress={() => {
+                    setDownTimeModelTimeCount(!DownTimeModelTimeCount);
+                    startStopwatch();
+                  }}
+                  style={{
+                    backgroundColor: '#E63F32',
+                    width: '100%',
+                    borderRadius: 8,
+                    height: 35,
+                  }}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontWeight: 'bold',
+                    }}>
+                    Cancel
+                  </Text>
                 </Button>
               </View>
             </View>
