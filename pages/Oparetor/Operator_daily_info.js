@@ -24,6 +24,7 @@ import MQTT from 'sp-react-native-mqtt';
 import Immersive from 'react-native-immersive';
 import {Table, Row} from 'react-native-table-component';
 import moment from 'moment';
+import KeepAwake from 'react-native-keep-awake';
 
 import {LogBox} from 'react-native';
 import SampleProblemList from './SampleProblemList';
@@ -89,6 +90,43 @@ const Operator_daily_info = ({navigation, route}) => {
   var headerFontside = deviceHeight * 0.018;
   const [running, setRunning] = useState(false);
   const [time, setTime] = useState(0);
+
+  useEffect(() => {
+    // Function to get the current time in 24-hour format
+    const getCurrentTime = () => {
+      const date = new Date();
+      const hours = date.getHours();
+      const minutes = date.getMinutes();
+      const formattedTime = `${hours < 10 ? '0' : ''}${hours}:${
+        minutes < 10 ? '0' : ''
+      }${minutes}`;
+      return formattedTime;
+    };
+
+    // Function to activate or deactivate KeepAwake based on the time
+    const updateKeepAwakeStatus = () => {
+      const currentTime1 = getCurrentTime();
+
+      // Adjust the time range based on your requirements
+      const shouldActivateKeepAwake =
+        currentTime1 >= '08:00' && currentTime1 <= '20:00';
+
+      if (shouldActivateKeepAwake) {
+        KeepAwake.activate();
+      } else {
+        KeepAwake.deactivate();
+      }
+    };
+
+    // Initial call to set the KeepAwake status and current time
+    updateKeepAwakeStatus();
+
+    // Set up interval to update KeepAwake status every minute
+    const intervalId = setInterval(updateKeepAwakeStatus, 6000);
+
+    // Cleanup the interval when the component is unmounted
+    return () => clearInterval(intervalId);
+  }, []);
 
   //   ----------------------per pcs Product Time---------------
   useEffect(() => {

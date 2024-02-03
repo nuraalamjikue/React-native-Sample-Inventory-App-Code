@@ -27,6 +27,7 @@
     "react-native-element-dropdown": "^2.10.1",
     "react-native-gesture-handler": "^2.13.4",
     "react-native-immersive": "^2.0.0",
+    "react-native-keep-awake": "^4.0.0",
     "react-native-listener": "^1.1.0",
     "react-native-material-menu": "^2.0.0",
     "react-native-modal": "^13.0.1",
