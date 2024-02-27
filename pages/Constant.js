@@ -7,7 +7,7 @@
 // export default instance;
 
 const REACT_NATIVE_APP_BACKEND_LIVE_API = 'http://192.168.1.232:91/api';
-//const REACT_NATIVE_APP_BACKEND_LIVE_API = 'http://localhost:5005/api';
+// const REACT_NATIVE_APP_BACKEND_LIVE_API = 'http://localhost:5005/api';
 //const REPORTED_BACKEND_LIVE_API = 'http://localhost:5005/api';
 
 export {REACT_NATIVE_APP_BACKEND_LIVE_API};

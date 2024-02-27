@@ -37,6 +37,8 @@ const Opareto_Qr_scanner = () => {
   const deviceHeight = Dimensions.get('window').height;
   const deviceWidth = Dimensions.get('window').width;
   var textFontSize = deviceHeight * 0.012;
+  var textFontSize20 = deviceHeight * 0.02;
+  var textFontSize18 = deviceHeight * 0.018;
   const [flashlightEnabled, setFlashlightEnabled] = useState(false);
   const [Dialog, setDialog] = useState(false);
   const navigation = useNavigation();
@@ -52,7 +54,7 @@ const Opareto_Qr_scanner = () => {
       instance
         .get(`/Op_Production_Calc/Sample_Planning_Data/${e.data}`)
         .then(response => {
-          // console.log('data scan', JSON.stringify(response.data));
+          // console.log('data scan', JSON.stringify(response.data, null, 2));
 
           setTableData(response.data);
         })
@@ -152,6 +154,9 @@ const Opareto_Qr_scanner = () => {
     <Text style={{color: '#fff', fontSize: textFontSize, fontWeight: 'bold'}}>
       Style
     </Text>,
+    <Text style={{color: '#fff', fontSize: textFontSize, fontWeight: 'bold'}}>
+      SampleType
+    </Text>,
 
     <View style={styles.checkboxContainer}>
       <Checkbox.Item
@@ -181,10 +186,14 @@ const Opareto_Qr_scanner = () => {
         <Text style={{color: '#fff', fontSize: textFontSize}}>
           {rowData.Style}
         </Text>,
-        ,
+
+        <Text style={{color: '#fff', fontSize: textFontSize}}>
+          {rowData.SampleType}
+        </Text>,
+
         <Pressable
           style={{
-            width: '80%',
+            width: '60%',
             height: '70%',
             justifyContent: 'center',
             alignContent: 'center',
@@ -199,7 +208,7 @@ const Opareto_Qr_scanner = () => {
           <Text
             style={{
               color: '#000',
-              fontSize: textFontSize,
+              fontSize: textFontSize18,
               textAlign: 'center',
               justifyContent: 'center',
               alignContent: 'center',
@@ -208,7 +217,7 @@ const Opareto_Qr_scanner = () => {
           </Text>
         </Pressable>,
       ]}
-      widthArr={[20, 50, 100, 100, 100]}
+      widthArr={[20, 35, 80, 80, 70, 90]}
       style={[styles.row, index % 2 && {backgroundColor: '#10A1C5'}]}
       textStyle={styles.text}
     />
@@ -379,7 +388,7 @@ const Opareto_Qr_scanner = () => {
                   <Table borderStyle={{borderColor: 'black'}}>
                     <Row
                       data={tableHead}
-                      widthArr={[20, 50, 100, 100, 100]}
+                      widthArr={[20, 35, 80, 80, 70, 90]}
                       style={styles.header}
                       textStyle={styles.headertext}
                     />

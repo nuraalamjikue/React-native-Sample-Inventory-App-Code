@@ -87,6 +87,8 @@ const Operator_daily_info = ({navigation, route}) => {
   const deviceHeight = Dimensions.get('window').height;
   var textFontSize20 = deviceHeight * 0.022;
   var textFontSize15 = deviceHeight * 0.015;
+  var textFontSize10 = deviceHeight * 0.01;
+
   var headerFontside = deviceHeight * 0.018;
   const [running, setRunning] = useState(false);
   const [time, setTime] = useState(0);
@@ -109,7 +111,7 @@ const Operator_daily_info = ({navigation, route}) => {
 
       // Adjust the time range based on your requirements
       const shouldActivateKeepAwake =
-        currentTime1 >= '08:00' && currentTime1 <= '20:00';
+        currentTime1 >= '07:30' && currentTime1 <= '21:00';
 
       if (shouldActivateKeepAwake) {
         KeepAwake.activate();
@@ -271,9 +273,11 @@ const Operator_daily_info = ({navigation, route}) => {
   };
 
   const getTotalWorkingMin = () => {
+    const originalString = getSampleType;
+    const convert_getSampleType = encodeURIComponent(originalString);
     instance
       .get(
-        `/Op_Production_Calc/getTotalWorkingMin/${getBuyerName}/${getstyleNo}/${getSeasonName}/${getLineName}/${employeeID}`,
+        `/Op_Production_Calc/getTotalWorkingMin/${getBuyerName}/${getstyleNo}/${getSeasonName}/${getLineName}/${employeeID}/${convert_getSampleType}`,
       )
       .then(response => {
         //console.log('data_____', JSON.stringify(response.data));
@@ -299,12 +303,20 @@ const Operator_daily_info = ({navigation, route}) => {
   };
 
   const getAllPartData = () => {
+    const originalString = getSampleType;
+    const convert_getSampleType = encodeURIComponent(originalString);
+
     instance
       .get(
-        `/Op_Production_Calc/getPartName/${getBuyerName}/${getstyleNo}/${getSeasonName}/${getLineName}/${employeeID}`,
+        `/Op_Production_Calc/getPartName/${getBuyerName}/${getstyleNo}/${getSeasonName}/${getLineName}/${employeeID}/${convert_getSampleType}`,
       )
+
+      // .get(
+      //   `/Op_Production_Calc/getPartName/COLUMBIA/WP0821/Spring-25/2S-03/09010003131/Proto%2FProto-1`,
+      // )
+
       .then(response => {
-        // console.log('data', JSON.stringify(response.data));
+        //console.log('data', JSON.stringify(response.data));
         setTableData(response.data);
         var result = response.data[0];
 
@@ -324,6 +336,7 @@ const Operator_daily_info = ({navigation, route}) => {
       })
       .catch(e => {
         console.log(e);
+        // console.log('hiiii');
       });
   };
   const getAllPartDataFristload = () => {
@@ -439,7 +452,7 @@ const Operator_daily_info = ({navigation, route}) => {
   };
 
   const handleDownTimeList = rowData => {
-    console.log('handleDownTimeList' + JSON.stringify(rowData));
+    //console.log('handleDownTimeList' + JSON.stringify(rowData));
     setDownTimeProblemName(rowData.DownTimeProblemList);
     setDownTimeProblemID(rowData.Id);
     setDownTimeModelTimeCount(true);
@@ -449,13 +462,13 @@ const Operator_daily_info = ({navigation, route}) => {
 
   const handleDataFromChild = data => {
     // Handle the data received from the child page
-    console.log('Data from child:', data);
+    //console.log('Data from child:', data);
     setDownTimeCount(data);
   };
 
   const closeModal = () => {
-    console.log('DownTimeProblemID' + DownTimeProblemID);
-    console.log('DownTimeCount' + DownTimeCount);
+    // console.log('DownTimeProblemID' + DownTimeProblemID);
+    // console.log('DownTimeCount' + DownTimeCount);
     var data_new = {
       employeeID: employeeID,
       downTimeProblemID: parseInt(DownTimeProblemID),
@@ -919,7 +932,7 @@ const Operator_daily_info = ({navigation, route}) => {
               height: 30,
               justifyContent: 'center',
               alignContent: 'center',
-              backgroundColor: '#E9C46B',
+              backgroundColor: '#033FA5',
               borderRadius: 5,
               elevation: 8,
             }}
@@ -930,13 +943,13 @@ const Operator_daily_info = ({navigation, route}) => {
             }}>
             <Text
               style={{
-                color: '#000',
-                fontSize: textFontSize15,
+                color: '#fff',
+                fontSize: textFontSize10,
                 textAlign: 'center',
                 justifyContent: 'center',
                 alignContent: 'center',
               }}>
-              Submit
+              Complete
             </Text>
           </Pressable>
         ),
